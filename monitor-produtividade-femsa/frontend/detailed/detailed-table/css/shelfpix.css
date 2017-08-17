@@ -1,0 +1,128 @@
+/**************************************
+                ELEMENT 
+***************************************/
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 8pt;
+}
+
+h1 {
+    display: inline-block;
+    font-size: small;
+}
+
+h2 {
+    padding: 5px;
+    border-radius: 3px;
+    background-color: #000;
+    color: white;
+}
+
+h3 {
+    padding: 5px;
+    border-radius: 3px;
+    background-color: #999;
+}
+
+table {
+    display:inline-block;
+    vertical-align:top;
+}
+
+th {
+    background-color: #d9d9d9;
+}
+
+tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+td, th {
+    padding: 5px 5px 5px 5px;
+}
+/**************************************
+                    ID 
+***************************************/
+#filters {
+    display: inline-block;
+    margin-left: 100px;
+}
+
+#menu-div {
+    padding: 0px 0px 0px 10px;
+    margin: -10px;
+    background-color: #f00;
+    color: #fff;
+}
+
+#main-title {
+    display: inline-block;
+}
+
+#supervisor-app-table {
+    margin-left: 225px;
+}
+
+#supervisor-table-meta {
+    font-size: 9pt;
+}
+
+#supervisor-progdiar-table {
+    display: none;
+}
+/**************************************
+                CLASS 
+***************************************/
+.pattern-width{
+    width:254px;
+}
+
+.bold-content {
+    font-weight: bold;
+}
+
+.spacer {
+    width:225px;
+}
+
+.spacer-2 {
+    width: 87px;
+}
+
+.canvas-main-wrapper {
+    display: inline-block;
+    display: 416px;
+}
+.canvas-wrapper {
+    display: inherit;
+}
+
+.hide {
+    display: none;
+}
+
+.th-meta {
+    width: 173px;
+    background-color:red;
+    color:white;
+}
+
+.th-performance {
+    width: 173px;
+}
+
+.th-acumulado {
+    width: 67px;
+}
+
+.th-progdiar {
+    width: 30px;
+}
+
+.td-center {
+    text-align: center;
+}
+
+#supervisor-meta-subgroup {
+    border-spacing: 1px;
+}

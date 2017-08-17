@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <!-- Ensures proper rendering and touch zooming, add the following <meta> tag inside the <head> element -->
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+        <meta charset="utf-8">
+        <meta http-equiv="refresh" content="360; URL=../monitoria-fabrica/index.html">
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        <link rel="stylesheet" href="../monitoria-fabrica/css/shelfpix.css">
+        <title>Monitor</title>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div id="menu-div">
+                <h1 id="main-title">Monitor de F&aacute;bricas - <small>FEMSA</small></h1>
+                <form method="get">
+                    <section id="filters" class="row">
+                        <select id="filter-country" class="filter" name="filter-country">
+                            <option value="Brazil">Brazil</option>
+                        </select>
+                        <select id="filter-state" class="filter"  name="filter-state">
+                            <option value="MS">MS</option>
+                        </select>
+                        <select id="filter-month" class="filter" name="filter-month">
+                            <option value="7">Julho</option>
+                            <option value="8">Agosto</option>
+                        </select>
+                        <select id="filter-year" class="filter" name="filter-year">
+                            <option value="2017">2017</option>
+                        </select>
+                        <input id="bt-search" type="submit" value="Buscar" name="bt-search"/>
+                    </section>
+                </form>
+            </div>
+            <section id="supervisor-data">
+                <h2 id="supervisor-title" class="well well-sm">
+                    Supervisor
+                </h2>
+            </section>
+            <section id="pesquisadores-data">
+                <h2 id="pesquisadores-title" class="well well-sm">
+                    Pesquisadores
+                </h2>
+            </section>
+        </div>
+        <script src="../monitoria-fabrica/js/jquery-3.2.1.min.js"></script>
+        <script src="../monitoria-fabrica/js/models-variables.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="../monitoria-fabrica/js/chart.bundle.min.js"></script>
+        <script src="../monitoria-fabrica/js/shelfpix.js"></script>
+        <script src="../monitoria-fabrica/js/engine-grafico.js"></script>
+        <script src="../monitoria-fabrica/js/helper.js"></script>
+        <script src="../monitoria-fabrica/js/engine-tabelas.js"></script>
+        
+    </body>
+</html>
