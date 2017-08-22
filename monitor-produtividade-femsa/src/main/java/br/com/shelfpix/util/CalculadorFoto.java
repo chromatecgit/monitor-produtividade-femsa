@@ -89,7 +89,9 @@ public class CalculadorFoto extends CalculadorCommons {
 	public List<ProgressoDiarioFoto> calcularProgressoFotoSupervisor(final List<Pesquisador> pesquisadores) {
 		List<ProgressoDiarioFoto> listaProgressoFoto = new ArrayList<>();
 		int hoje = LocalDate.now().getDayOfMonth();
-		for (int i = 1; i <= hoje; i++) {
+//		for (int i = 1; i <= hoje; i++) {
+		int maxDay = pesquisadores.stream().map(p -> p.getMeta().getListaProgressoMeta().size()).findFirst().orElse(hoje);
+		for (int i = 1; i <= maxDay; i++) {
 			ProgressoDiarioFoto progressoSupervisor = new ProgressoDiarioFoto();
 			for (Pesquisador pesquisador : pesquisadores) {
 				for (ProgressoDiarioFoto progressoPesquisador : pesquisador.getDetalhe().getListaProgressoFoto()) {

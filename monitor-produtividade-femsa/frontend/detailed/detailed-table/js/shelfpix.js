@@ -1,7 +1,8 @@
 $(document).ready(function() {
     $.ajax({
         type: "GET",
-        url: "http://ec2-54-191-107-92.us-west-2.compute.amazonaws.com:8085/monitor",
+        //url: "http://ec2-54-191-107-92.us-west-2.compute.amazonaws.com:8085/monitor",
+        url: "http://localhost:8081/monitor",
         context: document.body,
         dataType: "json"
     }).done(function(jsonSupervisor) {

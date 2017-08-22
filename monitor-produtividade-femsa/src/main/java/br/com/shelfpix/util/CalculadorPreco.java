@@ -46,7 +46,9 @@ public class CalculadorPreco extends CalculadorCommons {
 	public List<ProgressoDiarioPreco> calcularProgressoPrecoSupervisor(final List<Pesquisador> pesquisadores) {
 		List<ProgressoDiarioPreco> listaProgressoPreco = new ArrayList<>();
 		int hoje = LocalDate.now().getDayOfMonth();
-		for (int i = 1; i <= hoje; i++) {
+//		for (int i = 1; i <= hoje; i++) {
+		int maxDay = pesquisadores.stream().map(p -> p.getMeta().getListaProgressoMeta().size()).findFirst().orElse(hoje);
+		for (int i = 1; i <= maxDay; i++) {
 			ProgressoDiarioPreco progressoSupervisor = new ProgressoDiarioPreco();
 			for (Pesquisador pesquisador : pesquisadores) {
 				for (ProgressoDiarioPreco progressoPesquisador : pesquisador.getDetalhe().getListaProgressoPreco()) {
