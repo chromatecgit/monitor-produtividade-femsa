@@ -2,13 +2,14 @@
                 ELEMENT 
 ***************************************/
 body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 8pt;
 }
 
 h1 {
+    font-size: 18pt;
     display: inline-block;
-    font-size: small;
+    vertical-align: top;
 }
 
 h2 {
@@ -43,20 +44,24 @@ td, th {
 /**************************************
                     ID 
 ***************************************/
-#filters {
-    display: inline-block;
-    margin-left: 100px;
-}
 
 #menu-div {
-    padding: 0px 0px 0px 10px;
+    padding: 7px 7px 0px 7px;
     margin: -10px;
-    background-color: #f00;
+    background-color: rgba(197, 0, 10, 1);
     color: #fff;
 }
 
-#main-title {
+#form-filters {
     display: inline-block;
+}
+
+#menu-logotipo {
+    height: 60px;
+    border-style: solid;
+    border-width: 5px 5px 3px 5px;
+    border-color: #fff;
+    vertical-align: middle;
 }
 
 #supervisor-app-table {
@@ -69,6 +74,10 @@ td, th {
 
 #supervisor-progdiar-table {
     display: none;
+}
+
+#supervisor-meta-subgroup {
+    border-spacing: 1px;
 }
 /**************************************
                 CLASS 
@@ -103,7 +112,7 @@ td, th {
 
 .th-meta {
     width: 173px;
-    background-color:red;
+    background-color:rgba(197, 0, 10, 1);
     color:white;
 }
 
@@ -123,6 +132,3 @@ td, th {
     text-align: center;
 }
 
-#supervisor-meta-subgroup {
-    border-spacing: 1px;
-}

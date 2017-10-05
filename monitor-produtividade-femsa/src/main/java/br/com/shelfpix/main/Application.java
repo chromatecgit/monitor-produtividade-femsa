@@ -42,5 +42,10 @@ public class Application {
 
         };
     }
+    //TODO: consultar o banco para pegar de quais estados sao os pesquisadores e quem sao os respectivos supervisores
+    // a exibicao 
+    //TODO: iniciar agendamento de consultas ao banco
+    // a ideia e criar um "cache interno" com os resultados de todas as consultas da proc do alex
+    // em uma base SQLite, para que, mesmo offline, os dados nao desapareçam.
 
 }
