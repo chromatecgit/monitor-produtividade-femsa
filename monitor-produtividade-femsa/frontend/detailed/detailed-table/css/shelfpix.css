@@ -47,17 +47,25 @@ td, th {
 
 #menu-div {
     padding: 7px 7px 0px 7px;
-    margin: -10px;
+    margin: -10px -10px 15px -10px;
     background-color: rgba(197, 0, 10, 1);
     color: #fff;
 }
 
 #form-filters {
     display: inline-block;
+    vertical-align: middle;
+}
+
+#main-title {
+    
+    margin: 0% 5% 0% 2%;
+    font-size: 18pt;
+    vertical-align: middle;
 }
 
 #menu-logotipo {
-    height: 60px;
+    height: 40px;
     border-style: solid;
     border-width: 5px 5px 3px 5px;
     border-color: #fff;

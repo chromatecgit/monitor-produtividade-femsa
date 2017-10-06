@@ -42,6 +42,7 @@ public class Application {
 
         };
     }
+    
     //TODO: consultar o banco para pegar de quais estados sao os pesquisadores e quem sao os respectivos supervisores
     // a exibicao 
     //TODO: iniciar agendamento de consultas ao banco

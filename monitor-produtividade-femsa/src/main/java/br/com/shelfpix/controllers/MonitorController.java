@@ -58,61 +58,57 @@ public class MonitorController {
 		List<MetaViewDTO> listMetaDTO = null;
 
 		Supervisor supervisor = new Supervisor();
-		if (SOURCE.equals("Spreadsheet")) {
-			SpreadsheetExtractor extractor = new SpreadsheetExtractor();
-			extractor.extract();
-		} else if (SOURCE.equals("Database")) {
-			listMetaDTO = metaViewDAO.findAll();
-			
-			supervisor.setNome("Supervisor-MS");
-			List<Pesquisador> pesquisadores = converterParaPesquisadores(listMetaDTO);
-			supervisor.setPesquisadores(pesquisadores);
-			
-			//============ META
-			supervisor.setMeta(
-					calculadorMeta.criarMetaSupervisor(supervisor.getPesquisadores()));
-			supervisor.getMeta().setListaProgressoMeta(
-					calculadorMeta.calcularProgressoMetaSupervisor(pesquisadores));
-			supervisor.getMeta().setAcumulado(
-					calculadorMeta.calcularAcumulado(supervisor.getMeta().getListaProgressoMeta()));
-			//FIXME: Tirar essa repeticao e melhorar essa logica
-			supervisor.getMeta().setPerformance( 
-					calculadorMeta.calcularPerformance(supervisor.getMeta()));
-			supervisor.getMeta().setProjecao(
-					calculadorMeta.calcularProjecao(supervisor.getMeta()));
-			
-			//============ DETALHE
-			//FOTO
-			supervisor.getDetalhe().setListaProgressoFoto(
-					calculadorFoto.calcularProgressoFotoSupervisor(pesquisadores));
-			supervisor.getDetalhe().setAcumuladoFoto(
-					calculadorFoto.calcularAcumulado(supervisor.getDetalhe().getListaProgressoFoto()));
-			supervisor.getDetalhe().setPerformanceFoto(
-					calculadorFoto.calcularPerformance(supervisor.getDetalhe().getAcumuladoFoto()));
-			//PRECO
-			supervisor.getDetalhe().setListaProgressoPreco(
-					calculadorPreco.calcularProgressoPrecoSupervisor(pesquisadores));
-			supervisor.getDetalhe().setAcumuladoPreco(
-					calculadorPreco.calcularAcumulado(supervisor.getDetalhe().getListaProgressoPreco()));
-			supervisor.getDetalhe().setPerformancePreco(
-					calculadorPreco.calcularPerformance(supervisor.getDetalhe().getAcumuladoPreco()));
-			
-			//QUESTIONARIO
-			supervisor.getDetalhe().setListaProgressoQuestionario(
-					calculadorQuestionario.calcularProgressoQuestionarioSupervisor(pesquisadores));
-			supervisor.getDetalhe().setAcumuladoQuestionario(
-					calculadorQuestionario.calcularAcumulado(
-							supervisor.getDetalhe().getListaProgressoQuestionario()));
-			supervisor.getDetalhe().setPerformanceQuestionario(
-					calculadorQuestionario.calcularPerformance(
-							supervisor.getDetalhe().getAcumuladoQuestionario()));
-			
+	
+		listMetaDTO = metaViewDAO.findAll();
+		
+		supervisor.setNome("Supervisor-MS");
+		List<Pesquisador> pesquisadores = converterParaPesquisadores(listMetaDTO);
+		supervisor.setPesquisadores(pesquisadores);
+		
+		//============ META
+		supervisor.setMeta(
+				calculadorMeta.criarMetaSupervisor(supervisor.getPesquisadores()));
+		supervisor.getMeta().setListaProgressoMeta(
+				calculadorMeta.calcularProgressoMetaSupervisor(pesquisadores));
+		supervisor.getMeta().setAcumulado(
+				calculadorMeta.calcularAcumulado(supervisor.getMeta().getListaProgressoMeta()));
+		//FIXME: Tirar essa repeticao e melhorar essa logica
+		supervisor.getMeta().setPerformance( 
+				calculadorMeta.calcularPerformance(supervisor.getMeta()));
+		supervisor.getMeta().setProjecao(
+				calculadorMeta.calcularProjecao(supervisor.getMeta()));
+		
+		//============ DETALHE
+		//FOTO
+		supervisor.getDetalhe().setListaProgressoFoto(
+				calculadorFoto.calcularProgressoFotoSupervisor(pesquisadores));
+		supervisor.getDetalhe().setAcumuladoFoto(
+				calculadorFoto.calcularAcumulado(supervisor.getDetalhe().getListaProgressoFoto()));
+		supervisor.getDetalhe().setPerformanceFoto(
+				calculadorFoto.calcularPerformance(supervisor.getDetalhe().getAcumuladoFoto()));
+		//PRECO
+		supervisor.getDetalhe().setListaProgressoPreco(
+				calculadorPreco.calcularProgressoPrecoSupervisor(pesquisadores));
+		supervisor.getDetalhe().setAcumuladoPreco(
+				calculadorPreco.calcularAcumulado(supervisor.getDetalhe().getListaProgressoPreco()));
+		supervisor.getDetalhe().setPerformancePreco(
+				calculadorPreco.calcularPerformance(supervisor.getDetalhe().getAcumuladoPreco()));
+		
+		//QUESTIONARIO
+		supervisor.getDetalhe().setListaProgressoQuestionario(
+				calculadorQuestionario.calcularProgressoQuestionarioSupervisor(pesquisadores));
+		supervisor.getDetalhe().setAcumuladoQuestionario(
+				calculadorQuestionario.calcularAcumulado(
+						supervisor.getDetalhe().getListaProgressoQuestionario()));
+		supervisor.getDetalhe().setPerformanceQuestionario(
+				calculadorQuestionario.calcularPerformance(
+						supervisor.getDetalhe().getAcumuladoQuestionario()));
+		
 //			if () {
 //				SUPERVISOR_BACKUP = supervisor;
 //			}
-			
-			System.out.println(supervisor);
-		}
+		
+		System.out.println(supervisor);
 		long fim = System.currentTimeMillis();
 		System.out.println("FIM - MONITOR em " + ((fim - inicio)/1000) / 60 + " minutos");
 		return supervisor;
