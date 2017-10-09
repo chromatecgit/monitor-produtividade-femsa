@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.shelfpix.dao.MetaViewDAO;
-import br.com.shelfpix.engine.SpreadsheetExtractor;
 import br.com.shelfpix.model.Detalhe;
 import br.com.shelfpix.model.Meta;
 import br.com.shelfpix.model.Pesquisador;
@@ -25,14 +24,12 @@ import br.com.shelfpix.util.CalculadorFoto;
 import br.com.shelfpix.util.CalculadorMeta;
 import br.com.shelfpix.util.CalculadorPreco;
 import br.com.shelfpix.util.CalculadorQuestionario;
+import br.com.shelfpix.util.Chronometer;
 import br.com.shelfpix.util.Parser;
 
 //TODO: Remover o Hibernate, usar o JDBC direto para chamar a Procedure
 @RestController
 public class MonitorController {
-	
-	private static final Supervisor SUPERVISOR_BACKUP = new Supervisor();
-	private static final String SOURCE = "Database";
 	
 	@Autowired
 	MetaViewDAO metaViewDAO;
@@ -53,18 +50,24 @@ public class MonitorController {
 								@RequestParam(name="estado", required=false) final String estado,
 								@RequestParam(name="mes", required=false) final Integer mes,
 								@RequestParam(name="ano", required=false, defaultValue="2017") final Integer ano) {
-		System.out.println("INICIO - MONITOR");
-		long inicio = System.currentTimeMillis();
-		List<MetaViewDTO> listMetaDTO = null;
-
-		Supervisor supervisor = new Supervisor();
-	
-		listMetaDTO = metaViewDAO.findAll();
 		
+		System.out.println("INICIO - MONITOR");
+		
+		Chronometer.start();
+		List<MetaViewDTO> listMetaDTO = null;
+		listMetaDTO = metaViewDAO.findAll();
+		Chronometer.stop();
+		Chronometer.getTime("MetaViewDAO - findAll");
+		
+		Chronometer.start();
+		Supervisor supervisor = new Supervisor();
 		supervisor.setNome("Supervisor-MS");
 		List<Pesquisador> pesquisadores = converterParaPesquisadores(listMetaDTO);
 		supervisor.setPesquisadores(pesquisadores);
+		Chronometer.stop();
+		Chronometer.getTime("MonitorController - converterParaPesquisadores");
 		
+		Chronometer.start();
 		//============ META
 		supervisor.setMeta(
 				calculadorMeta.criarMetaSupervisor(supervisor.getPesquisadores()));
@@ -77,7 +80,10 @@ public class MonitorController {
 				calculadorMeta.calcularPerformance(supervisor.getMeta()));
 		supervisor.getMeta().setProjecao(
 				calculadorMeta.calcularProjecao(supervisor.getMeta()));
+		Chronometer.stop();
+		Chronometer.getTime("MetaViewDAO - META");
 		
+		Chronometer.start();
 		//============ DETALHE
 		//FOTO
 		supervisor.getDetalhe().setListaProgressoFoto(
@@ -93,7 +99,10 @@ public class MonitorController {
 				calculadorPreco.calcularAcumulado(supervisor.getDetalhe().getListaProgressoPreco()));
 		supervisor.getDetalhe().setPerformancePreco(
 				calculadorPreco.calcularPerformance(supervisor.getDetalhe().getAcumuladoPreco()));
+		Chronometer.stop();
+		Chronometer.getTime("MetaViewDAO - DETALHE");
 		
+		Chronometer.start();
 		//QUESTIONARIO
 		supervisor.getDetalhe().setListaProgressoQuestionario(
 				calculadorQuestionario.calcularProgressoQuestionarioSupervisor(pesquisadores));
@@ -103,14 +112,11 @@ public class MonitorController {
 		supervisor.getDetalhe().setPerformanceQuestionario(
 				calculadorQuestionario.calcularPerformance(
 						supervisor.getDetalhe().getAcumuladoQuestionario()));
-		
-//			if () {
-//				SUPERVISOR_BACKUP = supervisor;
-//			}
+		Chronometer.stop();
+		Chronometer.getTime("MetaViewDAO - QUESTIONARIO");
 		
 		System.out.println(supervisor);
-		long fim = System.currentTimeMillis();
-		System.out.println("FIM - MONITOR em " + ((fim - inicio)/1000) / 60 + " minutos");
+		
 		return supervisor;
 	}
 	

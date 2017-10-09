@@ -14,14 +14,16 @@ import org.springframework.context.annotation.PropertySources;
 
 @Configuration
 @EnableAutoConfiguration
-@PropertySources(value = {@PropertySource("classpath:application.properties")})
+@PropertySources(
+		value = {@PropertySource("classpath:application.properties")})
 @ComponentScan({
 	"br.com.shelfpix.controllers",
 	"br.com.shelfpix.dao",
 	"br.com.shelfpix.entities",
 	"br.com.shelfpix.model",
 	"br.com.shelfpix.model.dto",
-	"br.com.shelfpix.util"})
+	"br.com.shelfpix.util",
+	"br.com.shelfpix.config"})
 public class Application {
 
     public static void main(String[] args) {

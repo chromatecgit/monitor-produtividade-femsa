@@ -1,36 +1,42 @@
 package br.com.shelfpix.config;
 
-import org.apache.tomcat.jdbc.pool.DataSource;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.jdbc.core.JdbcTemplate;
 
-//@Configuration
-//@EnableTransactionManagement
+@Configuration
 public class DatabaseConfig {
+
+	//Exemplo de como usar mais de um DB no Spring
 	
-	@Autowired
-	private Environment environment;
+	/*
+	@Bean(name = "mysqlDb")
+	@Primary
+	@ConfigurationProperties(prefix = "spring.db_mysql")
+	public DataSource mysqlDataSource() {
+		return DataSourceBuilder.create().build();
+	}
 	
-	@Autowired
-	private DataSource dataSource;
-	
-	@Autowired
-	private LocalContainerEntityManagerFactoryBean entityManagerFactory;
-	
-	@Bean
-	public DataSource dataSource() {
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName(environment.getProperty("spring.datasource.driver-class-name"));
-		dataSource.setUrl(environment.getProperty("spring.datasource.url"));
-		dataSource.setUsername(environment.getProperty("spring.datasource.username"));
-		dataSource.setPassword(environment.getProperty("spring.datasource.password"));
-		dataSource.setSchema(environment.getProperty("spring.datasource.schema"));
-		
-		return this.dataSource;
+	@Bean(name = "mysql")
+    public JdbcTemplate mysqlJdbcTemplate(@Qualifier("mysqlDb") DataSource mysqlDb) { 
+        return new JdbcTemplate(mysqlDb); 
+    }
+    */
+
+	@Bean(name = "sqliteDb")
+	@ConfigurationProperties(prefix = "spring.db_sqlite")
+	public DataSource sqliteDataSource() {
+		return DataSourceBuilder.create().build();
+	}
+
+	@Bean(name = "sqlite")
+	public JdbcTemplate sqliteJdbcTemplate(
+			@Qualifier("sqliteDb") DataSource sqliteDb) {
+		return new JdbcTemplate(sqliteDb);
 	}
 }
