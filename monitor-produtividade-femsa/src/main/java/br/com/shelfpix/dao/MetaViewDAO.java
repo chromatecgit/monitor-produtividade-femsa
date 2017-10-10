@@ -21,6 +21,8 @@ public class MetaViewDAO {
 	private EntityManager manager;
 	
 	public List<MetaViewDTO> findAll() {
+		CacheDAOImpl cache = new CacheDAOImpl();
+				cache.findCountry();
 		StoredProcedureQuery query = manager.createStoredProcedureQuery("spxPkgMeta")
 				.registerStoredProcedureParameter("dataInicio", String.class, ParameterMode.IN)
 				.registerStoredProcedureParameter("dataFim", String.class, ParameterMode.IN)
