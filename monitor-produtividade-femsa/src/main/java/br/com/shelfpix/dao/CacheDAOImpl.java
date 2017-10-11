@@ -22,38 +22,38 @@ public class CacheDAOImpl implements CacheDAO {
 
 	@Override
 	public String findCountry() {
-		// sqliteTemplate.query("SELECT * FROM Countries", rse -> {
-		// while (rse.next()) {
-		// System.out.println(rse.getString("name"));
-		// }
-		// return "";
-		// });
-		// return null;
-		// SQLite connection string
-		//TODO:testar!
-		String x = System.getProperty("user.dir").replaceAll("\\", "/");
-		String dbFile = x + "/sqlite_db/MonitorFemsaCache.db";
-		String url = "jdbc:sqlite:" + dbFile;
-		Connection conn = null;
-		try {
-			conn = DriverManager.getConnection(url);
-			System.out.println("Connected to database");
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
-
-		String sql = "SELECT * FROM Countries";
-
-		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			ResultSet result = pstmt.executeQuery();
-			while(result.next()) {
-				String name = result.getString("name");
-				System.out.println(name);
+		sqliteTemplate.query("SELECT * FROM Countries", rse -> {
+			while (rse.next()) {
+				System.out.println(rse.getString("name"));
 			}
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
-		return conn.toString();
+			return "";
+		});
+		return null;
+		// SQLite connection string
+		// TODO:testar!
+		// String x = System.getProperty("user.dir").replaceAll("\\\\", "/");
+		// String dbFile = x + "/sqlite_db/MonitorFemsaCache.db";
+		// String url = "jdbc:sqlite:" + dbFile;
+		// Connection conn = null;
+		// try {
+		// conn = DriverManager.getConnection(url);
+		// System.out.println("Connected to database");
+		// } catch (SQLException e) {
+		// System.out.println(e.getMessage());
+		// }
+		//
+		// String sql = "SELECT * FROM Countries;";
+		//
+		// try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+		// ResultSet result = pstmt.executeQuery();
+		// while(result.next()) {
+		// String name = result.getString("name");
+		// System.out.println(name);
+		// }
+		// } catch (SQLException e) {
+		// System.out.println(e.getMessage());
+		// }
+		// return conn.toString();
 	}
 
 }

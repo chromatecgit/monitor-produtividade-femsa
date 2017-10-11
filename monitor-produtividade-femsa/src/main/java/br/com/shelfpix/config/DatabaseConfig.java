@@ -3,6 +3,7 @@ package br.com.shelfpix.config;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +12,15 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 @Configuration
 public class DatabaseConfig {
-
+	
+//	@Value("${cache.datasource_sqlite.driverClassName}")
+//	private String driverClassName;
+//	
+//	@Value("${cache.datasource_sqlite.urlRoot}")
+//	private String urlRoot;
+//	
+//	@Value("${cache.datasource_sqlite.dbName}")
+//	private String dbName;
 	//Exemplo de como usar mais de um DB no Spring
 	
 	/*
@@ -29,7 +38,7 @@ public class DatabaseConfig {
     */
 
 	@Bean(name = "sqliteDb")
-	@ConfigurationProperties(prefix = "spring.db_sqlite")
+	@ConfigurationProperties(prefix = "cache.datasource_sqlite")
 	public DataSource sqliteDataSource() {
 		return DataSourceBuilder.create().build();
 	}
